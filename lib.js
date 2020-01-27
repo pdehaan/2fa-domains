@@ -3,7 +3,9 @@ const path = require("path");
 
 const yaml = require("js-yaml").safeLoad;
 
-const BASE_DIR = path.dirname(require.resolve("twofactorauth/_data/sections.yml"));
+const BASE_DIR = path.dirname(
+  require.resolve("twofactorauth/_data/sections.yml")
+);
 
 module.exports = {
   fetchDomains,
@@ -16,16 +18,16 @@ async function fetchDomains() {
 
   for (const section of sections) {
     const data = await loadYaml(`${section.id}.yml`);
-    res.push(data.websites.map(obj => getHostname(obj.url)));
+    const websites = data.websites
+      .filter(website => website.hasOwnProperty("tfa"))
+      .map(website => getHostname(website.url));
+    res.push(websites);
   }
 
   return res.flat().sort();
 }
 
-async function loadYaml(
-  filename,
-  basedir = BASE_DIR
-) {
+async function loadYaml(filename, basedir = BASE_DIR) {
   const yamlPath = path.join(basedir, filename);
   const yamlString = await fs.readFile(yamlPath);
   return yaml(yamlString);

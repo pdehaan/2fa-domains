@@ -3,6 +3,8 @@ const path = require("path");
 
 const yaml = require("js-yaml").safeLoad;
 
+const BASE_DIR = path.dirname(require.resolve("twofactorauth/_data/sections.yml"));
+
 module.exports = {
   fetchDomains,
   getHostname
@@ -22,7 +24,7 @@ async function fetchDomains() {
 
 async function loadYaml(
   filename,
-  basedir = "./node_modules/twofactorauth/_data"
+  basedir = BASE_DIR
 ) {
   const yamlPath = path.join(basedir, filename);
   const yamlString = await fs.readFile(yamlPath);

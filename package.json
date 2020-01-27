@@ -1,22 +1,33 @@
 {
   "name": "2fa-domains",
-  "version": "1.0.0",
   "description": "Fetch a list of 2FA enabled websites via 2factorauth/twofactorauth.",
-  "bin": "cli.js",
+  "version": "1.0.0",
+  "author": "Peter deHaan",
+  "bin": {
+    "2fa-domains": "cli.js"
+  },
+  "bugs": {
+    "url": "https://github.com/pdehaan/2fa-domains/issues"
+  },
+  "dependencies": {
+    "js-yaml": "^3.13.1",
+    "napa": "^3.0.0"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/pdehaan/2fa-domains#readme",
+  "keywords": [
+    "2fa"
+  ],
+  "license": "MPL-2.0",
   "main": "lib.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdehaan/2fa-domains.git"
+  },
   "scripts": {
     "fetch-2fa": "napa 2factorauth/twofactorauth",
     "format": "npx prettier *.js --write",
     "postinstall": "npm run fetch-2fa",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "2fa"
-  ],
-  "author": "Peter deHaan",
-  "license": "MPL-2.0",
-  "dependencies": {
-    "js-yaml": "^3.13.1",
-    "napa": "^3.0.0"
   }
 }
